@@ -86,7 +86,7 @@ class ComplexPlane(abscplane.AbsComplexPlane):
         for x in range(0, self.xlen + 1):
             temp_list = []
             for y in range(0, self.ylen + 1):
-                temp_list.append(self.f(xlist[x] + ylist[y]*1j))
+                temp_list.append(self.f((xmin + inc_x*x) + (ymin + inc_y*y) * 1j))
             self.plane.append(temp_list)
 
 
