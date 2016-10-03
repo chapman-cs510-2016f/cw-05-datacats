@@ -73,32 +73,11 @@ class ComplexPlane(abscplane.AbsComplexPlane):
         and stores all values as lists within the class' plane variable.
 
         """
-        # creating our initial variables for our x-values:
-        # creating an empty list, calculate our incremental values, start value, and end value.
-        xlist=[]
+        # creating our initial increment variables for our x and y values:       
         inc_x = (abs(self.xmin)+abs(self.xmax))/self.xlen
-        x_count = self.xmin
-        x_stop = self.xmax
-
-        # using a while loop, starting at our start value we increment by our inc_x value and
-        # add that number to the end of the list. This will give us a list of all of our x values for our plane.
-        while x_count <= x_stop:
-            xlist.append(x_count)
-            x_count += inc_x
-
-        # creating our initial variables for our y-values:
-        # creating an empty list, calculate our incremental values, start value, and end value.
-        ylist=[]
         inc_y = (abs(self.ymin)+abs(self.ymax))/self.ylen
-        y_count = self.ymin
-        y_stop = self.ymax
-
-        # using a while loop, starting at our start value we increment by our inc_y value and
-        # add that number to the end of the list. This will give us a list of all of our y values for our plane.
-        while y_count <= y_stop:
-            ylist.append(y_count)
-            y_count += inc_y
-
+       
+      
         # This for-loop will add every x-value with every y-value, saving the values column wise
         # i.e. (-10,-10), (-10,-9), (-10.-8),...,(-10,n) for n = our y-values.
         # store these combinations into a list, and add that to our plane. 
@@ -119,7 +98,7 @@ class ComplexPlane(abscplane.AbsComplexPlane):
         by calling the create_plane() function. """
 
         # delete the existing plane first before recreating our plane.
-        del self.plane[[:]]
+        self.plane=[]
 
         # calling our create_plane() to redraw our plane.
         self.create_plane()
@@ -139,7 +118,6 @@ class ComplexPlane(abscplane.AbsComplexPlane):
         The function will then 'zoom in' by recreating the graph, given the newly defined values
         by calling the refresh() function.
         """
-        #xmin=self.xmin, xmax=self.xmax, xlen=self.xlen, ymin=self.ymin, ymax=self.ymax, ylen=self.ylen
         self.xmax = xmax
         self.xmin = xmin
         self.xlen = xlen
