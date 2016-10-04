@@ -70,10 +70,18 @@ class ComplexPlane(abscplane.AbsComplexPlane):
         and stores all values as lists within the class' plane variable.
 
         """
+<<<<<<< HEAD
         # First we calculate our point increment for both the x and y values
         inc_x = (abs(self.xmin)+abs(self.xmax))/self.xlen
         inc_y = (abs(self.ymin)+abs(self.ymax))/self.ylen
 
+=======
+        # creating our initial increment variables for our x and y values:       
+        inc_x = (abs(self.xmin)+abs(self.xmax))/self.xlen
+        inc_y = (abs(self.ymin)+abs(self.ymax))/self.ylen
+       
+      
+>>>>>>> 78eec52dabcc804944324938a88d9cec764095ce
         # This for-loop will add every x-value with every y-value, saving the values column wise
         # i.e. (-10,-10), (-10,-9), (-10.-8),...,(-10,n) for n = our y-values.
         # store these combinations into a list, and add that to our plane. 
@@ -81,8 +89,13 @@ class ComplexPlane(abscplane.AbsComplexPlane):
         # The loop will continue until all x-values and y-value combinations are added to our plane.
         for y in range(0, self.ylen + 1):
             temp_list = []
+<<<<<<< HEAD
             for x in range(0, self.xlen + 1):
                 temp_list.append(self.f((self.xmin + x*inc_x) + (self.ymin + y*inc_y)*1j))
+=======
+            for y in range(0, self.ylen + 1):
+                temp_list.append(self.f((xmin + inc_x*x) + (ymin + inc_y*y) * 1j))
+>>>>>>> 78eec52dabcc804944324938a88d9cec764095ce
             self.plane.append(temp_list)
 
     def refresh(self):
@@ -94,7 +107,11 @@ class ComplexPlane(abscplane.AbsComplexPlane):
         """
 
         # delete the existing plane first before recreating our plane.
+<<<<<<< HEAD
         self.plane = []
+=======
+        self.plane=[]
+>>>>>>> 78eec52dabcc804944324938a88d9cec764095ce
 
         # calling our create_plane() to redraw our plane.
         self.create_plane()
@@ -114,6 +131,10 @@ class ComplexPlane(abscplane.AbsComplexPlane):
         The function will then 'zoom in' by recreating the graph, given the newly defined values
         by calling the refresh() function.
         """
+<<<<<<< HEAD
+=======
+        self.xmax = xmax
+>>>>>>> 78eec52dabcc804944324938a88d9cec764095ce
         self.xmin = xmin
         self.xmax = xmax
         self.xlen = xlen
