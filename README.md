@@ -1,8 +1,8 @@
 # CS510 CW 5
 
-**Author(s):** _\<your name(s)\>_
+**Author(s):** _Simrath Ratra, Andrew Nguyen_
 
-[![Build Status](https://travis-ci.org/chapman-cs510-2016f/cw-05-YOURNAME.svg?branch=master)](https://travis-ci.org/chapman-cs510-2016f/cw-05-YOURNAME)
+[![Build Status](https://travis-ci.org/chapman-cs510-2016f/cw-05-datacats.svg?branch=master)](https://travis-ci.org/chapman-cs510-2016f/cw-05-datacats)
 
 **Due date:** 2016/10/04
 
@@ -26,7 +26,7 @@ Complete the following exercises, saving your solutions in the indicated files. 
 
 Analyze in this section what you found useful about this assignment in your own words. Include any lingering questions or comments that you may have.
 
-**CHANGEME**
+**Overall the assignment was a good practice for us to learn and use classes. I did liked how we also critiqued our old assignments to give us the opportunity to think more like programmers, get accustomed to how professionals work with coding, and to get us to think more critically about our coding. We don't believe this assignment was too difficult, but it did forced us to think a bit about the creation of the 2d grid, so we though that the assignment was good in that sense; to learn to think visually in our heads and to translate that into code. **
 
 ## Honor Pledge
 
@@ -37,4 +37,4 @@ I pledge that all the work in this repository is my own with only the following 
 
 Signed,
 
-**YOURNAME**
+**Simrath Ratra, Andrew Nguyen**
