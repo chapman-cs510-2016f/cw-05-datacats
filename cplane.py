@@ -30,12 +30,12 @@ More information on how to use each function is located in the functions' docstr
 
 
 class ComplexPlane(abscplane.AbsComplexPlane):
-      """Complex Plane Class: Sets the initial values for the object, as well as creates the plane.
+    """Complex Plane Class: Sets the initial values for the object, as well as creates the plane.
 
          The creation takes in the following arugments, and has default values if no value is passed through:
 
-            param1 (float) : maximum horizontal, X, axis value. Default value of 10
-            param2 (float) : minimum horizontal, X, axis value. Default value of -10
+            param1 (float) : minimum horizontal, X, axis value. Default value of -10
+            param2 (float) : maximum horizontal, X, axis value. Default value of 10
             param3 (int)   : number of horizontal points between the x-min and x-max values. Default value of 20.
             param4 (float) : maximum vertical, Y, axis value. Default value of 10
             param5 (float) : minimum vertical, Y, axis value. Default value of -10
@@ -45,15 +45,12 @@ class ComplexPlane(abscplane.AbsComplexPlane):
 
         The initialization will also call the class function, create_plane() to create the plane with the given
         arugments.
-        """
+    """
 
-    def __init__(self,
-                 xmax = 10.0, xin = -10.0, xlen = 20, ymax = 10.0, ymin = -10.0, ylen = 20,
-                 plane = [], f = lambda x : x):
-
+    def __init__(self, xmin=-10.0, xmax=10.0, xlen=20, ymin=-10.0, ymax=10.0, ylen=20, plane=[], f=lambda x:x):
         # initiate our initial values
-        self.xmax = xmax
         self.xmin = xmin
+        self.xmax = xmax
         self.xlen = xlen
         self.ymin = xmin
         self.ymax = ymax
@@ -65,7 +62,7 @@ class ComplexPlane(abscplane.AbsComplexPlane):
         self.create_plane()
 
     def create_plane(self):
-        """ Create Plane
+        """Create Plane
         Creation of the plane.
         This function will take the set values of xmin, xmax, xlen, ymin, ymax, ylen to
         create the plane.
@@ -73,62 +70,40 @@ class ComplexPlane(abscplane.AbsComplexPlane):
         and stores all values as lists within the class' plane variable.
 
         """
-        # creating our initial variables for our x-values:
-        # creating an empty list, calculate our incremental values, start value, and end value.
-        xlist=[]
+        # First we calculate our point increment for both the x and y values
         inc_x = (abs(self.xmin)+abs(self.xmax))/self.xlen
-        x_count = self.xmin
-        x_stop = self.xmax
-
-        # using a while loop, starting at our start value we increment by our inc_x value and
-        # add that number to the end of the list. This will give us a list of all of our x values for our plane.
-        while x_count <= x_stop:
-            xlist.append(x_count)
-            x_count += inc_x
-
-        # creating our initial variables for our y-values:
-        # creating an empty list, calculate our incremental values, start value, and end value.
-        ylist=[]
         inc_y = (abs(self.ymin)+abs(self.ymax))/self.ylen
-        y_count = self.ymin
-        y_stop = self.ymax
-
-        # using a while loop, starting at our start value we increment by our inc_y value and
-        # add that number to the end of the list. This will give us a list of all of our y values for our plane.
-        while y_count <= y_stop:
-            ylist.append(y_count)
-            y_count += inc_y
 
         # This for-loop will add every x-value with every y-value, saving the values column wise
         # i.e. (-10,-10), (-10,-9), (-10.-8),...,(-10,n) for n = our y-values.
         # store these combinations into a list, and add that to our plane. 
         # The nested loop will then traverse again and will get the combinations for the next x-value.
         # The loop will continue until all x-values and y-value combinations are added to our plane.
-        for x in range(0, self.xlen + 1):
+        for y in range(0, self.ylen + 1):
             temp_list = []
-            for y in range(0, self.ylen + 1):
-                temp_list.append(self.f(xlist[x] + ylist[y]*1j))
+            for x in range(0, self.xlen + 1):
+                temp_list.append(self.f((self.xmin + x*inc_x) + (self.ymin + y*inc_y)*1j))
             self.plane.append(temp_list)
-
 
     def refresh(self):
         """Regenerate complex plane.
         For every point (x + y*1j) in the plane, replace
         the point with the value self.f(x + y*1j).
         The function will first delete the existing plane and redraw the plane again
-        by calling the create_plane() function. """
+        by calling the create_plane() function. 
+        """
 
         # delete the existing plane first before recreating our plane.
-        del self.plane[[:]]
+        self.plane = []
 
         # calling our create_plane() to redraw our plane.
         self.create_plane()
 
-    def zoom(self, xmax, xmin, xlen, ymax, ymin, ylen):
-        """ This function zooms into the graph, given by the parameters
+    def zoom(self, xmin, xmax, xlen, ymin, ymax, ylen):
+        """This function zooms into the graph, given by the parameters
         Args:
-            param1 (float) : The new value for the maximum horizontal axis
-            param2 (float) : The new value for the minimum horizontal axis
+            param1 (float) : The new value for the minimum horizontal axis
+            param2 (float) : The new value for the maximum horizontal axis
             param3 (int)   : The new value for the horizontal points between the x-max and x-min values.
             param4 (float) : The new value for the maximum horizontal axis
             param5 (float) : The new value for the minimum horizontal axis
@@ -139,12 +114,11 @@ class ComplexPlane(abscplane.AbsComplexPlane):
         The function will then 'zoom in' by recreating the graph, given the newly defined values
         by calling the refresh() function.
         """
-        #xmin=self.xmin, xmax=self.xmax, xlen=self.xlen, ymin=self.ymin, ymax=self.ymax, ylen=self.ylen
-        self.xmax = xmax
         self.xmin = xmin
+        self.xmax = xmax
         self.xlen = xlen
-        self.ymax = ymax
         self.ymin = ymin
+        self.ymax = ymax
         self.ylen = ylen
         self.refresh()
 
