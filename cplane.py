@@ -72,13 +72,8 @@ class ComplexPlane(abscplane.AbsComplexPlane):
         """
 
         # First we calculate our point increment for both the x and y values
-        inc_x = (abs(self.xmin)+abs(self.xmax))/self.xlen
-        inc_y = (abs(self.ymin)+abs(self.ymax))/self.ylen
-
-
-        # creating our initial increment variables for our x and y values:
-        inc_x = (abs(self.xmin)+abs(self.xmax))/self.xlen
-        inc_y = (abs(self.ymin)+abs(self.ymax))/self.ylen
+        inc_x = (self.xmax - self.xmin)/(self.xlen - 1)
+        inc_y = (self.ymax - self.ymin)/(self.ylen - 1)
 
         # This for-loop will add every x-value with every y-value, saving the values column wise
         # i.e. (-10,-10), (-10,-9), (-10.-8),...,(-10,n) for n = our y-values.
@@ -99,9 +94,8 @@ class ComplexPlane(abscplane.AbsComplexPlane):
         by calling the create_plane() function. 
         """
 
-        # delete the existing plane first before recreating our plane.
+        # delete the existing plane first before recreating our plane by resetting the plane to an empty plane
         self.plane = []
-
         # calling our create_plane() to redraw our plane.
         self.create_plane()
 
